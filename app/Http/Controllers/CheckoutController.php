@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use DateTime;
+use App\Order;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
@@ -71,8 +74,8 @@ class CheckoutController extends Controller
         $i = 0;
 
         foreach (Cart::content() as $product) {
-            $products['product_' . $i][] = $product->title;
-            $products['product_' . $i][] = $product->price;
+            $products['product_' . $i][] = $product->model->title;
+            $products['product_' . $i][] = $product->model->price;
             $products['product_' . $i][] = $product->qty;
             $i++;
         }
