@@ -16,6 +16,10 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+
+        if (Cart::count() <= 0) {
+            return redirect()->route('products.index');
+        }
             Stripe::setApiKey('sk_test_51Hwb4QLhws6xnxzhQdWCsQ8yT4Ht5uGIH8jGKXTgVoIqy9jEOomkdAy9vmqqIFLffOSziAYu7cJRfo5SsNNomg4Q00UDLHNFU5');
 
              $intent = PaymentIntent::create([
@@ -49,9 +53,54 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $data = $request->json()->all();
+
+        $order = new Order();
+
+        $order->payment_intent_id = $data['paymentIntent']['id'];
+        
+        $order->amount = $data['paymentIntent']['amount'];
+
+        $order->payment_created_at = (new DateTime())
+        ->setTimestamp($data['paymentIntent']['created'])
+        ->format('Y-m-d H:i:s');
+
+        $products = [];
+
+        $i = 0;
+
+        foreach (Cart::content() as $product) {
+            $products['product_' . $i][] = $product->title;
+            $products['product_' . $i][] = $product->price;
+            $products['product_' . $i][] = $product->qty;
+            $i++;
+        }
+
+        $order->products = serialize($products);
+
+        $order->user_id = 15;
+
+        $order->save();
+
+        if ($data['paymentIntent']['status'] === 'succeeded') {
+                Cart::destroy();
+                Session::flash('success', 'votre commande a été traitée avec success. ');
+            
+            return response()->json(['success' => 'Payment Intent Succeeded']);
+        } else {
+
+            return response()->json(['success' => 'Payment Intent Not Succeeded']);
+ 
+        }
+
+       
     }
 
+        public function thankyou()
+        {
+            return Session::has('success') ?  view('checkout.thankyou') : redirect()->route('products.index'); 
+        }
     /**
      * Display the specified resource.
      *

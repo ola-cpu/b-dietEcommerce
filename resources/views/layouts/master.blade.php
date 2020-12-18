@@ -8,6 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.6">
+
+      @yield('extra-meta')
+      
     <title>Blog Template · Bootstrap</title>
       @yield('extra-script')
    
