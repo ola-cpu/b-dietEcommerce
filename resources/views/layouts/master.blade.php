@@ -9,7 +9,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.6">
     <title>Blog Template · Bootstrap</title>
-
+      @yield('extra-script')
    
 
     <!-- Bootstrap core CSS -->
@@ -224,5 +224,8 @@ h1, h2, h3, h4, h5, h6 {
     <a href="#">Revenir en haut</a>
   </p>
 </footer>
+
+@yield('extra-js')
+
 </body>
 </html>

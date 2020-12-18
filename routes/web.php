@@ -33,3 +33,7 @@ Route::get('/videpanier', function(){
 
 	Cart::destroy();
 });
+
+/* route vers checkout*/
+
+Route::get('/paiement','CheckoutController@index')->name('checkout.index');
