@@ -19,3 +19,9 @@ Route::get('/', function () {
 Route::get('/boutique','ProductController@index')->name('products.index');
 
 Route::get('/boutique/{slug}','ProductController@show')->name('products.show');
+
+
+/* la route vert le panier */
+
+
+Route::post('/panier/ajouter','CartController@store')->name('cart.store');
