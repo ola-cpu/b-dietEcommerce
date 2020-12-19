@@ -20,15 +20,6 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Favicons -->
-<link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/4.4/assets/img/favicons/manifest.json">
-<link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-<link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
-<meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
-<meta name="theme-color" content="#563d7c">
 
 
     <style>
@@ -163,7 +154,7 @@ h1, h2, h3, h4, h5, h6 {
   <header class="blog-header py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
       <div class="col-4 pt-1">
-        <a class="text-muted" href="{{ route('cart.index') }}"> Panier <span class="badge badge-pill badge-dark">{{ Cart::count() }}</span></a>
+        <a class="text-muted" href="{{ route('cart.index') }}"> Panier <span class="badge badge-pill badge-success">{{ Cart::count() }}</span></a>
       </div>
       <div class="col-4 text-center">
         <a class="blog-header-logo text-dark" href="#">Large</a>
@@ -179,18 +170,14 @@ h1, h2, h3, h4, h5, h6 {
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-      <a class="p-2 text-muted" href="#">World</a>
-      <a class="p-2 text-muted" href="#">U.S.</a>
-      <a class="p-2 text-muted" href="#">Technology</a>
-      <a class="p-2 text-muted" href="#">Design</a>
-      <a class="p-2 text-muted" href="#">Culture</a>
-      <a class="p-2 text-muted" href="#">Business</a>
-      <a class="p-2 text-muted" href="#">Politics</a>
-      <a class="p-2 text-muted" href="#">Opinion</a>
-      <a class="p-2 text-muted" href="#">Science</a>
-      <a class="p-2 text-muted" href="#">Health</a>
-      <a class="p-2 text-muted" href="#">Style</a>
-      <a class="p-2 text-muted" href="#">Travel</a>
+
+      @foreach (App\Category::all() as $category)
+
+      <a class="p-2 text-muted" href="{{ route('products.index', ['categorie' => $category->slug]) }}">{{ $category->name }}</a>
+
+      @endforeach
+      
+      
     </nav>
   </div>
 
@@ -203,6 +190,17 @@ h1, h2, h3, h4, h5, h6 {
     </div>
 
       @endif
+    @if (session('danger'))
+
+    <div class=" alert alert-danger">
+
+        {{ session('danger') }}
+      
+    </div>
+
+      @endif
+
+
 
   <!-- 
 
