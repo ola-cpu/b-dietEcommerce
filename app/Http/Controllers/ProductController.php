@@ -16,11 +16,11 @@ class ProductController extends Controller
 
             $products = Product::with('categories')->whereHas('categories', function ($query){
                 $query->where('slug', request()->categorie);
-            })->paginate(6);
+            })->orderBy('created_at', 'DESC')->paginate(6);
            
         } else {
 
-            $products = Product::with('categories')->paginate(6); 
+            $products = Product::with('categories')->orderBy('created_at', 'DESC')->paginate(6); 
         }
 
        
