@@ -30,5 +30,3 @@
   {{ $products->appends(request()->input())->links() }}
 
 @endsection
-
-
