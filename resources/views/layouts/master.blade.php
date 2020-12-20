@@ -163,8 +163,9 @@ h1, h2, h3, h4, h5, h6 {
         
         @include('partials.search')
 
+        @include('partials.auth')
 
-        <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+       
       </div>
     </div>
   </header>

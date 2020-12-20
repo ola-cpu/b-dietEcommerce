@@ -23,6 +23,7 @@ Route::get('/boutique/{slug}','ProductController@show')->name('products.show');
 Route::get('/search', 'ProductController@search')->name('products.search');
 
 
+Route::group(['middleware' => ['auth']], function () {
 
 
 /* la route vert le panier */
@@ -35,7 +36,11 @@ Route::patch('/panier/{rowId}', 'CartController@update')->name('cart.update');
 
 Route::delete('/panier/{rowId}','CartController@destroy')->name('cart.destroy');
 
+ 
+});
 
+
+Route::group(['middleware' => ['auth']], function () {
 
 /* route vers checkout*/
 
@@ -45,7 +50,13 @@ Route::post('/paiement','CheckoutController@store')->name('checkout.store');
 
 Route::get('/merci','CheckoutController@thankyou')->name('checkout.thankyou');
 
+});
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
