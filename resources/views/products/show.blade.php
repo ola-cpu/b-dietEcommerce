@@ -8,6 +8,7 @@
 
         <div class="col p-3 d-flex flex-column position-static">
           <muted class="d-inline-block mb-2 text-success">
+            <div class="badge badge-pill badge-info">{{ $stock }}</div>
             
             @foreach ($product->categories as $category)
 
@@ -20,6 +21,8 @@
           <span>{!! $product->description !!}</span>
           <strong class="mb-4 display-4 text-success">{{ $product->getPrice() }}</strong>
 
+          @if ($stock === 'Disponible')
+
           <form action="{{ route('cart.store') }}" method="POST"> 
 
             @csrf
@@ -29,6 +32,8 @@
             <button type="submit" class="btn btn-success mb-2"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Ajouter au panier</button>
 
           </form>
+
+          @endif
          
         </div>
         <div class="col-auto d-none d-lg-block">

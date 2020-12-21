@@ -38,21 +38,21 @@
 	                </tr>
 	              </thead>
 	              <tbody>
-	               
-	                @foreach (Cart::content() as $product)
-
-	                 <tr>
-	                  <th scope="row" class="border-0">
-	                    <div class="p-2">
-	                       <img src="{{ $product->model->image }}" alt="" width="70" class="img-fluid rounded shadow-sm">
-	                      <div class="ml-3 d-inline-block align-middle">
-	                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">{{ $product->model->title }}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category:</span>
+	                 @foreach (Cart::content() as $product)
+                                <tr>
+                                    <th scope="row" class="border-0">
+                                        <div class="p-2">
+                                            <img src="{{ asset('storage/' . $product->model->image) }}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                            <div class="ml-3 d-inline-block align-middle">
+                                                <h5 class="mb-0"> <a href="{{ route('products.show', ['slug' => $product->model->slug]) }}" class="text-dark d-inline-block align-middle">{{ $product->model->title }}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Catégories: @foreach ($product->model->categories as $category)
+                                                    {{ $category->name }}{{ $loop->last ? '' : ', '}}
+                                                @endforeach</span>
 	                      </div>
 	                    </div>
 	                  </th>
 	                  <td class="border-0 align-middle"><strong>{{ getPrice($product->subtotal()) }}</strong></td>
 	                  <td class="border-0 align-middle">
-	                  	<select name="qty" id="qty" data-id="{{ $product->rowId }}" 
+	                  	<select name="qty" id="qty" data-id="{{ $product->rowId }}" data-stock="{{ $product->model->stock }}" 
 	                  		class="custom-select">
 
 	                  		@for($i = 1; $i <= 6 ; $i++)
@@ -146,6 +146,7 @@
    			Array.from(selects).forEach((element) => {
    					element.addEventListener('change', function () {
    						var rowId = this.getAttribute('data-id');
+   						var stock = this.getAttribute('data-stock');
    						var token =document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
    						fetch(
@@ -160,7 +161,8 @@
    								},
    								method: 'PATCH',
    								body:JSON.stringify({
-			       				qty: this.value
+			       				qty: this.value,
+			       				stock: stock
 
 			       			}) 
 			   							}
