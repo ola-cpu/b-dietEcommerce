@@ -10,7 +10,7 @@
 
       @yield('extra-meta')
       
-    <title>Blog Template · Bootstrap</title>
+    <title>B_diet</title>
       @yield('extra-script')
    
 
@@ -241,8 +241,11 @@ h1, h2, h3, h4, h5, h6 {
 </div>
 
 
+
 <footer class="blog-footer">
-  <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+  <p>
+    <a href="">Ouroboros</a> - 🛒 Application E-Commerce avec Laravel 6
+  </p>
   <p>
     <a href="#">Revenir en haut</a>
   </p>
