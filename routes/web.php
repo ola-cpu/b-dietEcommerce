@@ -53,10 +53,14 @@ Route::get('/merci','CheckoutController@thankyou')->name('checkout.thankyou');
 });
 
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
+
 
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['prefix' => 'admine'], function () {
+    Voyager::routes();
+});
