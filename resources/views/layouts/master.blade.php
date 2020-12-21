@@ -10,7 +10,7 @@
 
       @yield('extra-meta')
       
-    <title>B_diet</title>
+    <title>B-diet</title>
       @yield('extra-script')
    
 
@@ -157,7 +157,7 @@ h1, h2, h3, h4, h5, h6 {
       </div>
       <div class="col-4 text-center">
         <a class="blog-header-logo" style="color: #228B22
-        !important;" href="{{ route('products.index') }}">🛍️ B_DietShop</a>
+        !important;" href="{{ route('products.index') }}">🛍️ B-DietShop</a>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
         
@@ -244,7 +244,7 @@ h1, h2, h3, h4, h5, h6 {
 
 <footer class="blog-footer">
   <p>
-    <a href="">Ouroboros</a> - 🛒 Application E-Commerce avec Laravel 6
+    <a href="">Ouroboros</a> - Empire OBA 
   </p>
   <p>
     <a href="#">Revenir en haut</a>
